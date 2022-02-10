@@ -1,4 +1,31 @@
 [
+   {
+    "date": "2022-02-11",
+    "description": "",
+    "content": [
+      {
+        "type": "new",
+        "categorie": "Une nouvelle statistiques est disponible :)",
+        "message": [
+          "Nous avons divisé la statistique “passage” en deux sous-sections : “passage avec remise de courrier” et “passage sans remise de courrier”."
+        ]
+      },
+      {
+        "type": "new",
+        "categorie": "Un formulaire de contact est désormais disponible",
+        "message": [
+          "Afin de faciliter le support, nous avons créé un formulaire de contact vous demandant directement les informations nécessaires."
+        ]
+      },
+      {
+        "type": "new",
+        "categorie": "Le portail usager est disponible !",
+        "message": [
+          "N’oubliez pas d’activer le portail usager auprès de vos domiciliés pour qu’ils puissent visualiser leur courrier en attente"
+        ]
+      },
+    ]
+  },
   {
     "date": "2022-01-25",
     "description": "",
