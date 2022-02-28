@@ -1,6 +1,8 @@
+import { UsagerProcuration } from "./../../../usager-shared/interfaces/usager-procuration";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import {
   AbstractControl,
+  FormArray,
   FormBuilder,
   FormGroup,
   Validators,
@@ -45,7 +47,7 @@ export class UsagersProfilProcurationCourrierComponent implements OnInit {
 
   public isFormVisible: boolean;
 
-  public procurationForm!: FormGroup;
+  public procurationsForm!: FormGroup;
   public minDateToday: NgbDateStruct;
 
   public minDateNaissance: NgbDateStruct;
@@ -83,26 +85,31 @@ export class UsagersProfilProcurationCourrierComponent implements OnInit {
   }
 
   get f(): { [key: string]: AbstractControl } {
-    return this.procurationForm.controls;
+    return this.procurationsForm.controls;
   }
 
-  public initForm(): void {
-    this.procurationForm = this.formBuilder.group(
+  public addProcuration(
+    procuration: UsagerProcuration = new UsagerProcuration()
+  ): void {
+    (this.procurationsForm.controls.procurations as FormArray).push(
+      this.newProcuration(procuration)
+    );
+  }
+
+  public newProcuration(procuration: UsagerProcuration) {
+    return this.formBuilder.group(
       {
-        nom: [this.usager.options.procuration.nom, [Validators.required]],
-        prenom: [this.usager.options.procuration.prenom, [Validators.required]],
-        dateFin: [
-          formatDateToNgb(this.usager.options.procuration.dateFin),
-          [Validators.required],
-        ],
+        nom: [procuration.nom, [Validators.required]],
+        prenom: [procuration.prenom, [Validators.required]],
+        dateFin: [formatDateToNgb(procuration.dateFin), [Validators.required]],
         dateDebut: [
-          formatDateToNgb(this.usager.options.procuration.dateDebut),
+          formatDateToNgb(procuration.dateDebut),
           [Validators.required],
         ],
         dateNaissance: [
           formatDateToNgb(
             this.usager.options.procuration.dateNaissance
-              ? new Date(this.usager.options.procuration.dateNaissance)
+              ? new Date(procuration.dateNaissance)
               : undefined
           ),
           [Validators.required],
@@ -117,17 +124,23 @@ export class UsagersProfilProcurationCourrierComponent implements OnInit {
     );
   }
 
+  public initForm(): void {
+    this.procurationsForm = this.formBuilder.group({
+      procurations: this.formBuilder.array([]),
+    });
+  }
+
   public editProcuration(): void {
     const formValue = {
-      ...this.procurationForm.value,
+      ...this.procurationsForm.value,
       dateFin: this.nbgDate.formatEn(
-        this.procurationForm.controls.dateFin.value
+        this.procurationsForm.controls.dateFin.value
       ),
       dateDebut: this.nbgDate.formatEn(
-        this.procurationForm.controls.dateDebut.value
+        this.procurationsForm.controls.dateDebut.value
       ),
       dateNaissance: this.nbgDate.formatEn(
-        this.procurationForm.controls.dateNaissance.value
+        this.procurationsForm.controls.dateNaissance.value
       ),
     };
 
@@ -153,11 +166,12 @@ export class UsagersProfilProcurationCourrierComponent implements OnInit {
       return;
     }
 
+    // TODO: Ajouter l'index du tableau à supprimer
     this.usagerProfilService.deleteProcuration(this.usager.ref).subscribe(
       (usager: UsagerLight) => {
         this.hideForm();
         this.usagerChanges.emit(usager);
-        this.procurationForm.reset();
+        this.procurationsForm.reset();
         this.usager = new UsagerFormModel(usager);
         this.toastService.success("Procuration supprimée avec succès");
         this.matomo.trackEvent("profil", "actions", "delete-procuration", 1);

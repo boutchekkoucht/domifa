@@ -4,6 +4,7 @@ import {
   UsagerDoc,
   UsagerLastInteractions,
   UsagerOptions,
+  UsagerOptionsProcuration,
   UsagerPreferenceContact,
   UsagerRdv,
   UsagerSexe,

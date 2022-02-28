@@ -7,6 +7,7 @@ import { UsagerImport } from "./UsagerImport.type";
 import { UsagerLastInteractions } from "./UsagerLastInteractions.type";
 import { UsagerNote } from "./UsagerNote.type";
 import { UsagerOptions } from "./UsagerOptions.type";
+import { UsagerOptionsProcuration } from "./UsagerOptionsProcuration.type";
 import { UsagerPreferenceContact } from "./UsagerPreferenceContact.type";
 import { UsagerRdv } from "./UsagerRdv.type";
 import { UsagerSexe } from "./UsagerSexe.type";
