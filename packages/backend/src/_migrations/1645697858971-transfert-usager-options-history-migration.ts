@@ -7,7 +7,6 @@ import { Usager } from "../_common/model";
 
 export class manualMigration1645697858971 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    /*
     console.log("up de merde");
     const usagers: Usager[] = await (
       await usagerRepository.typeorm()
@@ -17,8 +16,6 @@ export class manualMigration1645697858971 implements MigrationInterface {
             FROM usager
         `
     );
-
-    return;
 
     for (const usager of usagers) {
       for (const transfertHistory of usager.options.historique.transfert) {
@@ -62,8 +59,6 @@ export class manualMigration1645697858971 implements MigrationInterface {
         await usagerOptionsHistoryRepository.save(newUsagerOptionsHistory);
       }
     }
-
-    */
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
