@@ -111,6 +111,11 @@ export class ManageUsagersComponent implements OnInit, OnDestroy {
     DEPASSEE: "Domiciliation expirée",
   };
 
+  public labelsEntretien = {
+    COMING: "à venir",
+    OVERDUE: "date dépassée",
+  };
+
   public searchString: string | null;
   public filters: UsagersFilterCriteria;
   public filters$: Subject<UsagersFilterCriteria> = new ReplaySubject(1);
