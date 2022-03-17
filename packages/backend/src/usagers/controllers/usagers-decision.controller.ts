@@ -46,7 +46,8 @@ export class UsagersDecisionController {
     decision.userId = user.id;
     return await this.usagersService.setDecision(
       { uuid: usager.uuid },
-      decision
+      decision,
+      user
     );
   }
 

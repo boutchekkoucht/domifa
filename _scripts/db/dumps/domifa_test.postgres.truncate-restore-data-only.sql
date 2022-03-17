@@ -62,7 +62,8 @@ COPY public.structure (uuid, "createdAt", "updatedAt", version, id, adresse, "ad
 610966c4-ab91-43c0-88da-483ae23d0af2	2021-02-01 16:12:30.65884+00	2021-10-05 09:24:59.084266+00	6	4	rue de l'import	{"actif": false, "ville": "", "adresse": "", "codePostal": ""}	123	\N	44000		44	52	test.import@yopmail.com	\N	\N	f	2021-02-01 16:12:30.655+00	\N	\N	Structure de Test d'import	{"numeroBoite": false}	0101010101	{"nom": "Test", "prenom": "Import", "fonction": "Testeur"}	asso		t	Nantes	{"senderName": null, "senderDetails": null, "enabledByDomifa": true, "enabledByStructure": false}	{"enabledByDomifa": true, "enabledByStructure": false}	\N
 e159011b-6648-426d-a772-b3ca4f27a6d5	2021-01-26 07:51:53.846157+00	2021-01-26 07:51:53.846157+00	1	2	2 rue du test	\N	\N	\N	33600	\N	33	75	cias.test@yopmail.com	\N		f	2020-11-17 13:32:21.959+00	\N	2020-11-17	CIAS de Test	{"numeroBoite": false}	0102030405	{"nom": "Anna", "prenom": "Dupond", "fonction": "PDG"}	cias	b1ca3193633282c675257f1b05771a7605a4aa1c5ba231b3545564bfa33a	f	Pessac	{"senderName": null, "senderDetails": null, "enabledByDomifa": false, "enabledByStructure": false}	{"enabledByDomifa": true, "enabledByStructure": false}	\N
 1d1ed6f0-7674-474a-908b-d0bd8c6389cb	2021-01-26 07:51:53.846157+00	2021-12-06 15:26:01.35835+00	3	3	1 rue du test de l'organise agréé	\N	1234	80	44000	\N	44	52	structure@yopmail.com	{"token": "6V0XR2S", "userId": 3}		t	2020-11-17 13:34:35.821+00	\N	2021-12-06	Organisme agréé de Test	{"numeroBoite": false}	0506070809	{"nom": "Calvez", "prenom": "Simon", "fonction": "Directeur"}	asso	b8e2e05b767ac984f0f4b8a222062b07268f46265525f98d83e4b518b343	f	Nantes	{"senderName": null, "senderDetails": null, "enabledByDomifa": false, "enabledByStructure": false}	{"enabledByDomifa": true, "enabledByStructure": false}	\N
-412f6962-fc6e-4e48-b0a6-a37d6eebbc67	2021-01-26 07:51:53.846157+00	2022-03-08 23:20:21.353397+00	360	1	1 rue de l'océan	\N	\N	\N	92600	\N	92	11	ccas.test@yopmail.com	\N		f	2020-11-17 13:30:23.692+00	\N	2022-03-09	CCAS de Test	{"numeroBoite": false}	0602030405	{"nom": "Jean", "prenom": "Thomson", "fonction": "PDG"}	ccas	adfbfe24ff6de1f4e7c0011ad05028f5a129ced7f120079d20c4adf21d89	t	Asnieres-sur-seine	{"senderName": null, "senderDetails": null, "enabledByDomifa": true, "enabledByStructure": false}	{"enabledByDomifa": true, "enabledByStructure": true}	\N
+412f6962-fc6e-4e48-b0a6-a37d6eebbc67	2021-01-26 07:51:53.846157+00	2022-03-17 14:41:54.660255+00	363	1	1 rue de l'océan	\N	\N	\N	92600	\N	92	11	ccas.test@yopmail.com	\N		f	2020-11-17 13:30:23.692+00	\N	2022-03-17	CCAS de Test	{"numeroBoite": false}	0602030405	{"nom": "Jean", "prenom": "Thomson", "fonction": "PDG"}	ccas	adfbfe24ff6de1f4e7c0011ad05028f5a129ced7f120079d20c4adf21d89	t	Asnieres-sur-seine	{"senderName": null, "senderDetails": null, "enabledByDomifa": true, "enabledByStructure": false}	{"enabledByDomifa": true, "enabledByStructure": true}	\N
+c0d9b2e0-3c44-4c5a-9eec-7ae58708bbbf	2022-03-17 14:46:20.573716+00	2022-03-17 14:58:42.61546+00	4	5	1 RUE PASTEUR	{"actif": false, "ville": null, "adresse": null, "codePostal": ""}		\N	97488	HOTEL DE VILLE BP 2021	974	04	ccas-dom-tom@yopmail.com	\N	\N	f	2022-03-17 14:46:20.559+00	\N	2022-03-17	CENTRE COMMUNAL D'ACTION SOCIALE DE SAINT-DENIS	{"numeroBoite": false}	0606060606	{"nom": "Yomi", "prenom": "Elisabeth", "fonction": "Directrice"}	ccas		t	Saint-denis	{"senderName": null, "senderDetails": null, "enabledByDomifa": true, "enabledByStructure": false}	{"enabledByDomifa": true, "enabledByStructure": false}	Indian/Reunion
 \.
 
 
@@ -114,9 +115,6 @@ fb8dde95-b421-4cf0-b205-9e940d9641e5	2021-06-28 13:25:28.512802+00	2021-12-24 00
 --
 
 COPY public.message_email (uuid, "createdAt", "updatedAt", version, status, "emailId", "initialScheduledDate", "nextScheduledDate", "sendDate", content, "errorCount", "errorMessage", "sendDetails", attachments) FROM stdin;
-1a8fc8f6-bc6b-40fb-b2ed-b4e1af5cb4b5	2021-01-26 09:04:24.386282+00	2021-01-26 09:04:24.386282+00	1	pending	user-reset-password	2021-01-26 09:04:24.381+00	2021-01-26 09:04:24.381+00	\N	{"to": [{"address": "s1-admin@yopmail.com", "personalName": "Roméro Patrick"}], "from": {"personalName": "Domifa"}, "replyTo": {"personalName": "Domifa"}, "subject": "Demande d'un nouveau mot de passe", "tipimailModels": [{"email": "s1-admin@yopmail.com", "values": {"lien": "http://localhost:4200/reset-password/3d6a46c1ce375273a5db76838c6b5c73feb0bf97f88fa40698b67c2a97eb", "prenom": "Patrick"}, "subject": "Demande d'un nouveau mot de passe"}], "tipimailTemplateId": "users-nouveau-mot-de-passe"}	0	\N	\N	\N
-3192eafb-b86d-4f2f-ad6c-f7f7df01508a	2021-02-01 16:12:30.914556+00	2021-02-01 16:12:30.914556+00	1	pending	structure-created	2021-02-01 16:12:30.914+00	2021-02-01 16:12:30.914+00	\N	{"to": [{"personalName": "Domifa"}], "from": {"personalName": "Domifa"}, "replyTo": {"personalName": "Domifa"}, "subject": "Nouvelle structure sur Domifa ", "tipimailModels": [{"meta": {}, "values": {"email": "test.import@yopmail.com", "phone": "0101010101", "ville": "Nantes", "adresse": "rue de l'import", "user_nom": "Test", "user_email": "test.import@yopmail.com", "code_postal": "44000", "departement": "Loire-Atlantique", "user_prenom": "Import", "structure_name": "Structure de Test d'import", "structure_type": "Organisme agrée", "responsable_nom": "Test", "lien_suppression": "http://localhost:4200/structures/delete/4/63ba3e786570cfc32fdc9d2d46b365cb23d4b955df308579ffd0ab0f23c7", "lien_confirmation": "http://localhost:4200/structures/confirm/4/63ba3e786570cfc32fdc9d2d46b365cb23d4b955df308579ffd0ab0f23c7", "responsable_prenom": "Import", "responsable_fonction": "Testeur"}, "subject": "Nouvelle structure sur Domifa "}], "tipimailTemplateId": "domifa-nouvelle-structure"}	0	\N	\N	\N
-3e6f55be-2f38-4dad-8bcf-16551f9154e7	2021-02-01 16:13:04.645677+00	2021-02-01 16:13:04.645677+00	1	pending	user-account-activated	2021-02-01 16:13:04.644+00	2021-02-01 16:13:04.644+00	\N	{"to": [{"address": "test.import@yopmail.com", "personalName": "Import Test"}], "from": {"personalName": "Domifa"}, "replyTo": {"personalName": "Domifa"}, "subject": "Votre compte Domifa a été activé", "tipimailModels": [{"meta": {}, "email": "test.import@yopmail.com", "values": {"lien": "http://localhost:4200/", "prenom": "Import", "nom_structure": "Structure de Test d'import"}, "subject": "Votre compte Domifa a été activé"}], "tipimailTemplateId": "users-compte-active"}	0	\N	\N	\N
 \.
 
 
@@ -188,8 +186,9 @@ COPY public.user_structure (uuid, "createdAt", "updatedAt", version, email, fonc
 d81c5566-94f9-4ee4-ab57-a604a654f79b	2020-11-17 13:32:22.193933+00	2020-11-17 13:39:14.015103+00	17	s3-admin@yopmail.com	\N	5	2020-11-17 13:39:13.796+00	Roseline	$2a$10$3yXcVfWYOWsI/KzAwZ0BrOay1Dp/ZOF5RjhLL0QA2Pt7gQVg2U86u	Parmentier	admin	3	{"guide": false, "import": false}	2020-11-17 13:39:14.013+00	t
 f6b20e00-77e7-46e6-b48d-8cca69161042	2020-11-17 13:32:22.193+00	2021-12-06 15:26:01.366576+00	4	s3-gestionnaire@yopmail.com	Responsable structure	10	2021-12-06 15:26:01.365+00	Etchebest	$2a$10$3yXcVfWYOWsI/KzAwZ0BrOay1Dp/ZOF5RjhLL0QA2Pt7gQVg2U86u	Philippe	responsable	3	{"guide": false, "import": false}	\N	t
 d19ece1f-d32b-498c-9427-eb12b1251163	2020-11-17 13:26:29.482634+00	2020-11-17 13:26:29.490297+00	2	s3-facteur@yopmail.com	\N	4	\N	Test	$2a$10$3yXcVfWYOWsI/KzAwZ0BrOay1Dp/ZOF5RjhLL0QA2Pt7gQVg2U86u	Facteur	facteur	3	{"guide": false, "import": false}	\N	t
-da01f451-9c4f-4f6c-98bb-c635277e33e7	2020-11-17 13:18:47.658346+00	2022-03-08 22:28:55.672092+00	382	s1-admin@yopmail.com	\N	1	2022-03-08 22:28:55.665+00	Roméro	$2a$10$3yXcVfWYOWsI/KzAwZ0BrOay1Dp/ZOF5RjhLL0QA2Pt7gQVg2U86u	Patrick	admin	1	{"guide": false, "import": false}	\N	t
 b0140303-79e3-436c-9c41-1eaefeeaed6e	2020-11-17 13:23:20.248011+00	2022-03-08 23:20:21.36073+00	9	s1-gestionnaire@yopmail.com	\N	3	2022-03-08 23:20:21.356+00	Smith	$2a$10$3yXcVfWYOWsI/KzAwZ0BrOay1Dp/ZOF5RjhLL0QA2Pt7gQVg2U86u	Peter	responsable	1	{"guide": false, "import": false}	\N	t
+7c7098e0-cfc5-48c7-a969-15887f041aa8	2022-03-17 14:46:20.682355+00	2022-03-17 14:58:42.621783+00	5	s5-admin@yopmail.com	\N	11	2022-03-17 14:58:42.588+00	Yomi	$2a$10$9WRoa1ruUv0z43njqH6tx.3grIF5lo51hgpF0ZeT2/S6U8DQSaTfi	Elisabeth	admin	5	{"guide": false, "import": false}	2022-03-17 14:46:20.675+00	t
+da01f451-9c4f-4f6c-98bb-c635277e33e7	2020-11-17 13:18:47.658346+00	2022-03-17 14:58:47.220611+00	395	s1-admin@yopmail.com	\N	1	2022-03-17 14:58:47.216+00	Roméro	$2a$10$3yXcVfWYOWsI/KzAwZ0BrOay1Dp/ZOF5RjhLL0QA2Pt7gQVg2U86u	Patrick	admin	1	{"guide": false, "import": false}	\N	t
 \.
 
 
@@ -205,8 +204,9 @@ e931e0d8-ecbb-478a-97a3-a01eac88e24f	2021-03-15 15:53:55.740856+00	2021-03-15 15
 8dddd469-7b63-44f3-8166-15830e80ee7b	2021-03-15 15:53:55.740856+00	2021-03-15 15:53:55.740856+00	1	6	1	\N	[]
 759bdc26-be9d-4ffb-95c9-8c2d7a06a63b	2021-03-15 15:53:55.740856+00	2021-03-15 15:53:55.740856+00	1	8	3	\N	[]
 d84e9cc2-5c52-4a02-880e-bcfb27180594	2021-03-15 15:53:55.74+00	2021-12-06 15:26:00.681872+00	2	10	3	\N	[{"date": "2021-12-06T15:26:00.672Z", "type": "login-success"}]
-e0bcefc6-f1be-4c83-ac9d-6ea47335a9c3	2021-03-15 15:53:55.740856+00	2021-12-06 15:27:27.597514+00	5	1	1	\N	[{"date": "2021-12-06T15:26:55.036Z", "type": "login-error"}, {"date": "2021-12-06T15:27:19.481Z", "type": "login-error"}, {"date": "2021-12-06T15:27:27.596Z", "type": "login-success"}]
 9fe998b5-7178-44b5-9c40-2e18ba233f1d	2021-03-15 15:53:55.740856+00	2022-03-08 23:20:17.365808+00	3	3	1	\N	[{"date": "2022-03-08T23:20:17.329Z", "type": "login-success"}]
+e0bcefc6-f1be-4c83-ac9d-6ea47335a9c3	2021-03-15 15:53:55.740856+00	2022-03-17 14:57:35.178712+00	8	1	1	\N	[{"date": "2022-03-17T14:41:41.580Z", "type": "login-success"}, {"date": "2022-03-17T14:57:12.729Z", "type": "login-success"}, {"date": "2022-03-17T14:57:35.151Z", "type": "login-success"}]
+e07a87f9-4758-4b5b-bb2a-5c7f489effda	2022-03-17 14:46:20.693551+00	2022-03-17 14:58:42.396598+00	2	11	5	\N	[{"date": "2022-03-17T14:58:42.361Z", "type": "login-success"}]
 \.
 
 
@@ -241,14 +241,14 @@ SELECT pg_catalog.setval('public.structure_doc_id_seq', 1, false);
 -- Name: structure_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.structure_id_seq', 4, true);
+SELECT pg_catalog.setval('public.structure_id_seq', 5, true);
 
 
 --
 -- Name: user_structure_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.user_structure_id_seq', 10, true);
+SELECT pg_catalog.setval('public.user_structure_id_seq', 11, true);
 
 
 --

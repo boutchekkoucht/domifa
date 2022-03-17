@@ -5,7 +5,7 @@ export type TimeZone =
   | "Indian/Mayotte"
   | "Europe/Paris"
   | "Pacific/Noumea"
-  | "Pacific/Gambier"
+  | "Pacific/Tahiti"
   | "Pacific/Wallis"
   | "America/Miquelon"
   | "Indian/Maldives";

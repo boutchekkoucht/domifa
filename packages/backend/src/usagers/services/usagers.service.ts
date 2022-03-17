@@ -19,6 +19,7 @@ import {
   UserStructure,
   UserStructureProfile,
   UsagerTypeDom,
+  UserStructureAuthenticated,
 } from "../../_common/model";
 import { usagerHistoryStateManager } from "./usagerHistoryStateManager.service";
 import { usagersCreator } from "./usagersCreator.service";
@@ -26,6 +27,8 @@ import { usagerVisibleHistoryManager } from "./usagerVisibleHistoryManager.servi
 import { CreateUsagerDto } from "../dto/CreateUsagerDto";
 import { RdvDto } from "../dto/rdv.dto";
 import { DecisionDto } from "../dto";
+import { utcToZonedTime } from "date-fns-tz";
+import { endOfDay } from "date-fns";
 
 @Injectable()
 export class UsagersService {
@@ -34,6 +37,7 @@ export class UsagersService {
     user: UserStructureProfile
   ): Promise<UsagerLight> {
     const usager = new UsagerTable(usagerDto);
+    const now = utcToZonedTime(new Date(), user.structure.timeZone);
 
     usagersCreator.setUsagerDefaultAttributes(usager);
 
@@ -42,11 +46,12 @@ export class UsagersService {
 
     usager.decision = {
       uuid: uuidGenerator.random(),
-      dateDecision: new Date(),
+      dateDecision: now,
       statut: "INSTRUCTION",
       userName: user.prenom + " " + user.nom,
       userId: user.id,
-      dateFin: new Date(),
+      dateFin: now,
+      dateDebut: now,
     };
 
     usager.historique.push(usager.decision);
@@ -82,8 +87,10 @@ export class UsagersService {
 
   public async renouvellement(
     usager: UsagerLight,
-    user: Pick<UserStructure, "id" | "nom" | "prenom">
+    user: Pick<UserStructure, "id" | "nom" | "prenom" | "structure">
   ): Promise<UsagerLight> {
+    const now = utcToZonedTime(new Date(), user.structure.timeZone);
+
     const typeDom: UsagerTypeDom =
       usager.decision.statut === "REFUS" || usager.decision.statut === "RADIE"
         ? "PREMIERE_DOM"
@@ -91,13 +98,13 @@ export class UsagersService {
     let newDateFin = null;
 
     if (usager.decision.statut === "VALIDE") {
-      newDateFin = usager.decision.dateFin;
+      newDateFin = endOfDay(usager.decision.dateFin);
     }
 
     usager.decision = {
       uuid: uuidGenerator.random(),
-      dateDebut: new Date(),
-      dateDecision: new Date(),
+      dateDebut: now,
+      dateDecision: now,
       dateFin: newDateFin,
       statut: "INSTRUCTION",
       userId: user.id,
@@ -127,7 +134,7 @@ export class UsagersService {
       historyBeginDate: usager.decision.dateDebut,
     });
 
-    usager.lastInteraction.dateInteraction = new Date();
+    usager.lastInteraction.dateInteraction = now;
 
     return usagerLightRepository.updateOne(
       { uuid: usager.uuid },
@@ -145,9 +152,12 @@ export class UsagersService {
 
   public async setDecision(
     { uuid }: { uuid: string },
-    decision: DecisionDto
+    decision: DecisionDto,
+    user: UserStructureAuthenticated
   ): Promise<UsagerLight> {
-    decision.dateDecision = new Date();
+    const now = utcToZonedTime(new Date(), user.structure.timeZone);
+
+    decision.dateDecision = now;
 
     const usager = await usagerRepository.findOne({
       uuid,
@@ -162,8 +172,14 @@ export class UsagersService {
     if (decision.statut === "REFUS" || decision.statut === "RADIE") {
       decision.dateFin =
         decision.dateFin !== undefined && decision.dateFin !== null
-          ? new Date(decision.dateFin)
-          : new Date();
+          ? // Fin de la journée pour la date de fin
+            endOfDay(
+              utcToZonedTime(
+                new Date(decision.dateFin),
+                user.structure.timeZone
+              )
+            )
+          : now;
       decision.dateDebut = decision.dateFin;
     }
 
@@ -178,12 +194,22 @@ export class UsagersService {
         usager.typeDom = "RENOUVELLEMENT";
       } else {
         usager.typeDom = "PREMIERE_DOM";
-        usager.datePremiereDom = new Date(decision.dateDebut);
+        usager.datePremiereDom = utcToZonedTime(
+          new Date(decision.dateDebut),
+          user.structure.timeZone
+        );
       }
 
-      decision.dateDebut = new Date(decision.dateDebut);
-      decision.dateFin = new Date(decision.dateFin);
+      decision.dateDebut = utcToZonedTime(
+        new Date(decision.dateDebut),
+        user.structure.timeZone
+      );
 
+      decision.dateFin = endOfDay(
+        utcToZonedTime(new Date(decision.dateFin), user.structure.timeZone)
+      );
+
+      // TODO: Vérifier la timezone ICI
       // Si la dom est valide après le dernier passage, on le met à jour
       if (
         decision.dateDebut > new Date(usager.lastInteraction.dateInteraction)

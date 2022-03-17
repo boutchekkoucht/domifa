@@ -149,18 +149,18 @@ export class StepRdvComponent implements OnInit {
       userId: this.me.id,
     };
     this.loading = true;
-    this.usagerDossierService.setRdv(rdvFormValue, this.usager.ref).subscribe(
-      (usager: UsagerLight) => {
+    this.usagerDossierService.setRdv(rdvFormValue, this.usager.ref).subscribe({
+      next: (usager: UsagerLight) => {
         this.loading = false;
         this.router.navigate(["usager/" + usager.ref + "/edit/entretien"]);
       },
-      () => {
+      error: () => {
         this.loading = false;
         this.toastService.error(
           "Impossible de réaliser l'entretien maintenant"
         );
-      }
-    );
+      },
+    });
   }
 
   public submitRdv(): void {

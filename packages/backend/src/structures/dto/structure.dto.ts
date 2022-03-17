@@ -10,7 +10,8 @@ import {
   ValidateNested,
 } from "class-validator";
 import { StructureAdresseCourrierDto, StructureResponsableDto } from ".";
-import { StructureType, TimeZone } from "../../_common/model";
+import { TimeZone } from "../../util/territoires";
+import { StructureType } from "../../_common/model";
 
 export class StructureDto {
   @ApiProperty({

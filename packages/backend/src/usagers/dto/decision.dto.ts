@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Transform, TransformFnParams } from "class-transformer";
 import {
   IsDateString,
   IsEmpty,
@@ -31,6 +32,9 @@ export class DecisionDto implements UsagerDecision {
   @ValidateIf((o) => o.statut === "VALIDE")
   @IsNotEmpty()
   @IsDateString()
+  @Transform(({ value }: TransformFnParams) => {
+    return value ? new Date(value) : null;
+  })
   public dateDebut!: Date;
 
   @ApiProperty({
@@ -40,6 +44,9 @@ export class DecisionDto implements UsagerDecision {
     (o) => o.statut === "VALIDE" || o.statut === "REFUS" || o.statut === "RADIE"
   )
   @IsNotEmpty()
+  @Transform(({ value }: TransformFnParams) => {
+    return value ? new Date(value) : null;
+  })
   public dateFin!: Date;
 
   @ApiProperty({

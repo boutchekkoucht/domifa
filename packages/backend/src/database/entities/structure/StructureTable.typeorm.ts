@@ -1,10 +1,10 @@
 import { Column, Entity, Generated, Index } from "typeorm";
+import { TimeZone } from "../../../util/territoires";
 import {
   Structure,
   StructurePortailUsagerParams,
   StructureResponsable,
   StructureType,
-  TimeZone,
 } from "../../../_common/model";
 import { StructureAddresseCourrier } from "../../../_common/model/structure/StructureAddresseCourrier.type";
 import { StructureSmsParams } from "../../../_common/model/structure/StructureSmsParams.type";

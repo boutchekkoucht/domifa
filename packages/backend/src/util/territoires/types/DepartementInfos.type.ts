@@ -1,4 +1,4 @@
-import { TimeZone } from "./../../../_common/model/structure/TimeZone.type";
+import { TimeZone } from "./TimeZone.type";
 export type DepartementInfos = {
   [key: string]: {
     departmentName: string;

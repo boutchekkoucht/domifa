@@ -243,6 +243,7 @@ describe("interactionsCreator", () => {
     usager.lastInteraction.dateInteraction = new Date(
       lastInteractionDateBefore
     );
+
     const interaction: InteractionDto = {
       type: "courrierOut",
       content: "Test transfert du courrier",
@@ -254,6 +255,7 @@ describe("interactionsCreator", () => {
       userName: "Nom",
       dateInteraction: new Date(),
     };
+
     usager.options.transfert.actif = false;
 
     usager.options.procurations = [

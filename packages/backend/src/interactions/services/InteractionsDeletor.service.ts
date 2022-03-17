@@ -28,7 +28,10 @@ export class InteractionsDeletor {
   }: {
     interaction: Interactions;
     usager: UsagerLight;
-    user: Pick<UserStructure, "id" | "structureId" | "nom" | "prenom">;
+    user: Pick<
+      UserStructure,
+      "id" | "structureId" | "nom" | "prenom" | "structure"
+    >;
     structure: Pick<Structure, "id" | "sms">;
   }): Promise<UsagerLight> {
     const newEvent: InteractionEvent =
@@ -164,7 +167,10 @@ export class InteractionsDeletor {
     interaction,
     newEvent,
   }: {
-    user: Pick<UserStructure, "id" | "structureId" | "nom" | "prenom">;
+    user: Pick<
+      UserStructure,
+      "id" | "structureId" | "nom" | "prenom" | "structure"
+    >;
     interaction: Interactions;
     newEvent: InteractionEvent;
   }) {

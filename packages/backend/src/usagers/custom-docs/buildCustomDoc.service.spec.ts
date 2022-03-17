@@ -5,7 +5,7 @@ import { StructureCustomDocTags } from "../../_common/model";
 import {
   generatedAttestationMock,
   generatedRefusMock,
-  structureMock,
+  STRUCTURE_MOCK,
 } from "./mocks";
 
 describe("buildCustomDoc.service", () => {
@@ -13,7 +13,7 @@ describe("buildCustomDoc.service", () => {
     const date = new Date("2020-12-15 14:30:00");
     const docActif: StructureCustomDocTags = buildCustomDoc({
       usager: usagerValideMock,
-      structure: structureMock,
+      structure: STRUCTURE_MOCK,
       date,
     });
 
@@ -24,7 +24,7 @@ describe("buildCustomDoc.service", () => {
     const date = new Date("2020-12-15 14:30:00");
     const docActif: StructureCustomDocTags = buildCustomDoc({
       usager: usagerValideMock,
-      structure: structureMock,
+      structure: STRUCTURE_MOCK,
       date,
     });
 
@@ -40,7 +40,7 @@ describe("buildCustomDoc.service", () => {
     };
     const docRadiation: StructureCustomDocTags = buildCustomDoc({
       usager: usagerValideMock,
-      structure: structureMock,
+      structure: STRUCTURE_MOCK,
       date,
       extraParameters,
     });
@@ -59,7 +59,7 @@ describe("buildCustomDoc.service", () => {
 
     const docActif: StructureCustomDocTags = buildCustomDoc({
       usager: usagerRefusMock,
-      structure: structureMock,
+      structure: STRUCTURE_MOCK,
       date,
     });
 
@@ -94,7 +94,7 @@ describe("buildCustomDoc.service", () => {
 
     const customDocGenerated: StructureCustomDocTags = buildCustomDoc({
       usager: usagerValideMock,
-      structure: structureMock,
+      structure: STRUCTURE_MOCK,
       date,
     });
 
