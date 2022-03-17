@@ -33,7 +33,7 @@ describe("interactionsCreator", () => {
     // TimeZone par défaut
     process.env.TZ = "Europe/Paris";
     // On défini la valeur que devrait avoir new Date();
-    MockDate.set("2020-12-01T10:00:24.980Z");
+    MockDate.set("2020-12-01T11:00:24.980Z");
 
     context = await AppTestHelper.bootstrapTestApp({
       imports: [
@@ -194,7 +194,7 @@ describe("interactionsCreator", () => {
       });
 
       expect(resultat.usager.lastInteraction.dateInteraction).toEqual(
-        "2020-12-01T10:00:24.980Z"
+        "2020-12-01T11:00:24.980Z"
       );
     });
   });
