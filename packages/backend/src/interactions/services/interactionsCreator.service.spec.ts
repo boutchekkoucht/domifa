@@ -30,6 +30,8 @@ describe("interactionsCreator", () => {
   let structure;
 
   beforeAll(async () => {
+    // TimeZone par défaut
+    process.env.TZ = "Europe/Paris";
     // On défini la valeur que devrait avoir new Date();
     MockDate.set("2020-12-01T10:00:24.980Z");
 
@@ -342,6 +344,8 @@ describe("interactionsCreator", () => {
         new Date(createdInteractionIn.interaction.dateInteraction)
       );
 
+      console.log(new Date());
+      console.log(isDstObserved(new Date()));
       // Si heure d'hiver, décalage horaire de 5 heures, sinon 4 heures
       let expectedDiff = isDstObserved(new Date()) ? 4 : 5;
       expect(diffHours).toEqual(expectedDiff);
