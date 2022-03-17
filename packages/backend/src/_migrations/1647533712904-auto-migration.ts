@@ -8,7 +8,7 @@ export class autoMigration1647533712904 implements MigrationInterface {
       `ALTER TABLE "usager" ALTER COLUMN "options" SET DEFAULT '{ "transfert":{ "actif":false, "nom":null, "adresse":null, "dateDebut":null, "dateFin":null }, "procurations":[], "npai":{ "actif":false, "dateDebut":null }, "portailUsagerEnabled":false }'`
     );
     await queryRunner.query(
-      `ALTER TABLE "interactions" ALTER "dateInteraction"  TYPE timestamptz;`
+      `ALTER TABLE "interactions" ALTER "dateInteraction" TYPE timestamptz;`
     );
   }
 
