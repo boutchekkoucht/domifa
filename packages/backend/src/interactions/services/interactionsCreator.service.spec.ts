@@ -387,11 +387,7 @@ describe("interactionsCreator", () => {
 });
 
 const isDstObserved = function (date: Date) {
-  return date.getTimezoneOffset() < stdTimezoneOffset(date);
-};
-
-export const stdTimezoneOffset = function (date: Date) {
-  const jan = new Date(date.getFullYear(), 0, 1);
-  const jul = new Date(date.getFullYear(), 6, 1);
-  return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+  const jan = new Date(date.getFullYear(), 0, 1).getTimezoneOffset();
+  const jul = new Date(date.getFullYear(), 6, 1).getTimezoneOffset();
+  return Math.max(jan, jul) !== date.getTimezoneOffset();
 };
