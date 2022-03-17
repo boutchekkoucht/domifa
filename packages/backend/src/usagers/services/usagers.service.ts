@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import moment = require("moment");
 
 import {
   usagerLightRepository,
@@ -28,7 +27,7 @@ import { CreateUsagerDto } from "../dto/CreateUsagerDto";
 import { RdvDto } from "../dto/rdv.dto";
 import { DecisionDto } from "../dto";
 import { utcToZonedTime } from "date-fns-tz";
-import { endOfDay } from "date-fns";
+import { endOfDay, subMinutes } from "date-fns";
 
 @Injectable()
 export class UsagersService {
@@ -260,19 +259,23 @@ export class UsagersService {
     });
 
     if (!usager.rdv) {
-      usager.rdv = {} as any;
+      usager.rdv = {
+        userId: rdv.userId,
+        userName: user.prenom + " " + user.nom,
+        dateRdv: null,
+      };
     }
 
     if (rdv.isNow) {
       usager.etapeDemande = ETAPE_ENTRETIEN;
-      rdv.dateRdv = moment.utc().subtract(1, "minutes").toDate();
-    } else {
-      rdv.dateRdv = moment.utc(rdv.dateRdv).toDate();
-    }
 
-    usager.rdv.dateRdv = rdv.dateRdv;
-    usager.rdv.userId = rdv.userId;
-    usager.rdv.userName = user.prenom + " " + user.nom;
+      usager.rdv.dateRdv = utcToZonedTime(
+        subMinutes(new Date(), 1),
+        user.structure.timeZone
+      );
+    } else {
+      usager.rdv.dateRdv = utcToZonedTime(rdv.dateRdv, user.structure.timeZone);
+    }
 
     usager = await usagerLightRepository.updateOne(
       { uuid },

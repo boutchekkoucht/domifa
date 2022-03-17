@@ -63,7 +63,7 @@ describe("structureStatsInPeriodGenerator", () => {
         recommandeIn: 3,
         recommandeOut: 0,
         visite: 1,
-        visiteOut: 0,
+        visiteOut: 1,
       },
       validUsagers: {
         age: {

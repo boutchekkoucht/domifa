@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { utcToZonedTime } from "date-fns-tz";
 import { interactionRepository } from "../../database";
 import { MessageSmsService } from "../../sms/services/message-sms.service";
 import { UsagersService } from "../../usagers/services/usagers.service";
@@ -95,14 +96,16 @@ export class InteractionsDeletor {
         }
       }
 
+      const dateInteractionWithGoodTimeZone = utcToZonedTime(
+        new Date(usager.lastInteraction.dateInteraction),
+        user.structure.timeZone
+      );
+
       // Récupération de la bonne date de dernière interaction
       if (INTERACTION_OK_LIST.indexOf(interaction.type) !== -1) {
         // Seulement si aucun autre évènement n'a déjà changé la date de dernier passage
         // C'est possible si un renouvellement a été effectué après la saisie de ce courrier
-        if (
-          new Date(usager.lastInteraction.dateInteraction) <=
-          interaction.dateInteraction
-        ) {
+        if (dateInteractionWithGoodTimeZone <= interaction.dateInteraction) {
           const lastInteractionOk =
             await interactionRepository.findLastInteractionOk({
               user,
