@@ -1,12 +1,9 @@
 import { buildCustomDoc } from ".";
+import { STRUCTURE_MOCK } from "../../_common/mocks";
 import { usagerRefusMock } from "../../_common/mocks/usagerRefus.mock";
 import { usagerValideMock } from "../../_common/mocks/usagerValideMock.mock";
 import { StructureCustomDocTags } from "../../_common/model";
-import {
-  generatedAttestationMock,
-  generatedRefusMock,
-  STRUCTURE_MOCK,
-} from "./mocks";
+import { generatedAttestationMock, generatedRefusMock } from "./mocks";
 
 describe("buildCustomDoc.service", () => {
   it("Generate data for ATTESTATION POSTALE", async () => {
@@ -116,6 +113,5 @@ describe("buildCustomDoc.service", () => {
     expect(customDocGenerated.PROCURATION_DATE_DEBUT).toEqual("20/12/2022");
     expect(customDocGenerated.PROCURATION_DATE_FIN).toEqual("04/09/2023");
     expect(customDocGenerated.PROCURATION_DATE_NAISSANCE).toEqual("12/12/1998");
-    // expect(docActif).toEqual(generatedAttestationMock);
   });
 });

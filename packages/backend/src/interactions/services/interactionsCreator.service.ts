@@ -38,7 +38,7 @@ async function createInteraction({
     new Date(),
     user.structure.timeZone
   );
-  console.log(user.structure.timeZone);
+
   const direction = interactionsTypeManager.getDirection({
     type: interaction.type,
   });
@@ -120,8 +120,6 @@ async function createInteraction({
     dateInteraction: todayWithGoodTimeZone,
     event: "create",
   };
-
-  console.log(newInteraction);
 
   // Enregistrement de l'interaction
   const interactionCreated = await interactionRepository.save(

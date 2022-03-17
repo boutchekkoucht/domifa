@@ -47,6 +47,7 @@ describe("interactionsCreator", () => {
       context.module.get<InteractionsDeletor>(InteractionsDeletor);
 
     user = await userStructureRepository.findOne({ id: 1 });
+    user.structure = await structureRepository.findOne({ id: 1 });
 
     // Reset des courriers
     await interactionRepository.deleteByCriteria({
@@ -290,5 +291,54 @@ describe("interactionsCreator", () => {
       usager,
       user,
     });
+  });
+
+  it("6. Distribution d'un courrier dans une structure avec une autre TimeZone (La réunion UTC+4)", async () => {
+    const userDomTom = await userStructureRepository.findOne({ id: 11 });
+    userDomTom.structure = await structureRepository.findOne({ id: 5 });
+    const usagerDomTom = await usagerRepository.findOne({
+      ref: 1,
+      structureId: userDomTom.structure.id,
+    });
+
+    console.log(usagerDomTom.lastInteraction);
+    const interactionIn = new InteractionDto();
+    interactionIn.type = "courrierIn";
+    interactionIn.content = "Ceci est une liste de courriers";
+    interactionIn.nbCourrier = 10;
+    interactionIn.dateInteraction = new Date();
+
+    const createdInteractionIn = await interactionsCreator.createInteraction({
+      usager: usagerDomTom,
+      user: userDomTom,
+      interaction: interactionIn,
+    });
+
+    expect(createdInteractionIn.usager.prenom).toEqual("Dimitri");
+    expect(createdInteractionIn.usager.lastInteraction.courrierIn).toEqual(10);
+    expect(createdInteractionIn.usager.lastInteraction.colisIn).toEqual(0);
+    expect(createdInteractionIn.usager.lastInteraction.recommandeIn).toEqual(0);
+
+    const interactionOut = new InteractionDto();
+    interactionOut.type = "courrierOut";
+    interactionOut.content = "Retrait du courrier";
+
+    // On test un faux nombre de courrier sortants
+    interactionOut.nbCourrier = 190;
+    const resultat = await interactionsCreator.createInteraction({
+      usager,
+      user,
+      interaction: interactionOut,
+    });
+
+    expect(resultat.usager.lastInteraction.colisIn).toEqual(0);
+
+    // // clean
+    // await interactionsDeletor.deleteOrRestoreInteraction({
+    //   interaction: resultat.interaction,
+    //   structure,
+    //   usager,
+    //   user,
+    // });
   });
 });
