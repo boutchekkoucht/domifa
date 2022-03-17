@@ -4,6 +4,7 @@ import { StructurePortailUsagerParams } from "./StructurePortailUsagerParams.typ
 import { StructureResponsable } from "./StructureResponsable.type";
 import { StructureSmsParams } from "./StructureSmsParams.type";
 import { StructureType } from "./StructureType.type";
+import { TimeZone } from "./TimeZone.type";
 
 export type Structure = AppEntity & {
   id: number;
@@ -41,6 +42,8 @@ export type Structure = AppEntity & {
 
   token: string;
   verified: boolean;
+
+  timeZone: TimeZone;
 
   sms: StructureSmsParams;
   portailUsager: StructurePortailUsagerParams;

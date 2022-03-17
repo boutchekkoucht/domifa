@@ -4,6 +4,7 @@ import {
   StructurePortailUsagerParams,
   StructureResponsable,
   StructureType,
+  TimeZone,
 } from "../../../_common/model";
 import { StructureAddresseCourrier } from "../../../_common/model/structure/StructureAddresseCourrier.type";
 import { StructureSmsParams } from "../../../_common/model/structure/StructureSmsParams.type";
@@ -106,6 +107,9 @@ export class StructureTable
       `'{"senderName": null, "senderDetails": null, "enabledByDomifa": true, "enabledByStructure": false}'`,
   })
   sms: StructureSmsParams;
+
+  @Column({ type: "text", nullable: true })
+  timeZone: TimeZone;
 
   @Column({
     type: "jsonb",
